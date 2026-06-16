@@ -1,0 +1,34 @@
+Q1.Assign row numbers based on Salary ASC.
+   Return all columns plus RowNum.
+
+  SELECT *, 
+     ROW_NUMBER() OVER (ORDER BY Salary ASC) AS RowNum
+  FROM Employees;
+
+Q2.Assign row numbers based on Salary DESC.
+  Return all columns plus RowNum.
+
+ SELECT *, 
+    ROW_NUMBER() OVER (ORDER BY Salary DESC) AS RowNum 
+ FROM Employees;
+
+Q3.Assign row numbers within each Department, ordered by Salary DESC.
+   Return all columns plus RowNum.
+  
+ SELECT * , 
+     ROW_NUMBER() OVER (PARTITION BY Department ORDER BY Salary DESC) AS RowNum 
+ FROM Employees;
+
+Q4.Assign row numbers within each Department, ordered by Salary ASC.
+   Return all columns plus RowNum.
+
+ SELECT * , 
+     ROW_NUMBER() OVER (PARTITION BY Department ORDER BY Salary ASC) AS RowNum 
+ FROM Employees;
+
+Q5.Assign row numbers within each Department, ordered by Name ASC.
+   Return all columns plus RowNum.
+
+   SELECT * , 
+     ROW_NUMBER() OVER (PARTITION BY Department ORDER BY Name ASC) AS RowNum 
+ FROM Employees;
