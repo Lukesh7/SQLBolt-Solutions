@@ -1,0 +1,54 @@
+(Advanced Window Functions)
+
+Practice Questions
+
+Q1. Calculate running total of Salary within each Department 
+    ordered by Salary ASC.
+
+   SELECT *, 
+         SUM(Salary) OVER (
+              PARTITION BY Department 
+              ORDER BY Salary ASC
+         ) AS RunningTotal 
+   FROM Employees;
+
+Q2. Calculate running total of Salary within each Department 
+    ordered by Salary DESC.
+
+    SELECT *, 
+         SUM(Salary) OVER (
+              PARTITION BY Department 
+              ORDER BY Salary DESC
+         ) AS RunningTotal 
+   FROM Employees;
+
+Q3. Calculate running total of Salary within each Department 
+    ordered by Name ASC.
+   SELECT *, 
+         SUM(Salary) OVER (
+              PARTITION BY Department 
+              ORDER BY Name ASC
+         ) AS RunningTotal 
+   FROM Employees;
+
+Q4. Show Department-wise running total but 
+    include only IT department.
+
+   SELECT *, 
+         SUM(Salary) OVER (
+               PARTITION BY Department 
+               ORDER BY Salary
+         ) AS RunningTotal 
+   FROM Employees 
+   WHERE Department = 'IT';
+
+Q5. Show running total + show all employees 
+    sorted by Department then Salary DESC.
+
+   SELECT *, 
+          SUM(Salary) OVER (
+               PARTITION BY Department 
+               ORDER BY Salary) 
+          AS RunningTotal 
+   FROM Employees 
+   ORDER BY Department, Salary DESC;
