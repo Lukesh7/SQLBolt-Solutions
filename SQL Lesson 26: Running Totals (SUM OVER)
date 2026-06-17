@@ -1,0 +1,30 @@
+Practice Questions
+Q1. Show all columns plus a running total of Amount ordered by SaleID.
+
+   SELECT *, 
+        SUM (Amount) OVER (ORDER BY SaleID) AS RunningTotal 
+   FROM Sales;
+
+Q2. Show all columns plus a running total of Amount ordered by Amount ASC.
+
+   SELECT *, 
+        SUM(Amount) OVER (ORDER BY Amount ASC) AS RunTot 
+   FROM Sales;
+
+Q3. Show all columns plus a running total of Amount ordered by Amount DESC.
+
+   SELECT *, 
+        SUM(Amount) OVER (ORDER BY Amount DESC) AS RunningTotal
+   FROM Sales;
+
+Q4. Show Month, Amount and running total ordered by SaleID.
+
+   SELECT Month, Amount, 
+        SUM(Amount) OVER (ORDER BY SaleID) AS RunningTotal 
+   FROM Sales;
+
+Q5. Show SaleID, Amount and running total ordered by SaleID.
+
+   SELECT SaleID, Amount, 
+           SUM(Amount) OVER (ORDER BY SaleID) AS RunningTotal 
+   FROM Sales;
