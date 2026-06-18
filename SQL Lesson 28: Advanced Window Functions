@@ -1,0 +1,88 @@
+Practice Questions (Interview Level)
+
+Q1.Show:
+RANK()
+Salary difference from previous employee (LAG)
+Partition by Department
+
+   SELECT *, 
+	RANK() OVER (
+		PARTITION BY Department 
+		ORDER BY Salary ASC) 
+	AS RankNum, 
+	
+	Salary - LAG(Salary) OVER (
+		PARTITION BY Department 
+		ORDER BY Salary ASC) 
+	AS SalDiff 
+   FROM Employees;
+
+Q2.Show:
+DENSE_RANK()
+LEAD(Salary)
+Order by Salary DESC
+
+   SELECT *, 
+	DENSE_RANK() OVER (
+		ORDER BY Salary DESC
+	) AS DenseRankVal, 
+	
+ 	LEAD(Salary) OVER (
+		ORDER BY Salary DESC
+	) AS NextSalary 
+   FROM Employees;
+
+Q3.Find:
+Running total per Department
+And rank employees by Salary
+
+   SELECT *, 
+	SUM(Salary) OVER (PARTITION BY Department ORDER BY Salary ) AS RunningTotal, 
+	RANK() OVER (ORDER BY Salary DESC) AS RankValue 
+   FROM Employees ;
+
+Q4.Show:
+Previous Salary
+Next Salary
+Overall Salary Rank (no partition)
+
+   SELECT *, 
+	LAG(Salary) OVER (ORDER BY Salary) AS PrevSalary, 
+	LEAD(Salary) OVER (ORDER BY Salary) AS NextSalary, 
+	RANK() OVER (ORDER BY SALARY DESC) 
+   FROM Employees;
+
+Q5.Show everything: (Hard)
+Rank
+Dense Rank
+LAG
+LEAD
+Running Total
+(All partitioned by Department)
+
+   SELECT *, 
+	RANK() OVER (
+		PARTITION BY Department 
+		ORDER BY Salary DESC) 
+	AS RankVal,
+
+	DENSE_RANK() OVER (
+		PARTITION BY Department 
+		ORDER BY Salary DESC
+	) AS DenseRankVal,
+ 
+	LAG(Salary) OVER (
+		PARTITION BY Department 
+		ORDER BY Salary
+	) AS PrevSalary, 
+
+	LEAD(Salary) OVER (
+		PARTITION BY Department 
+		ORDER BY Salary
+	) AS NextSalary,
+ 
+	SUM(Salary) OVER (
+		PARTITION BY Department 
+		ORDER BY Salary
+	) AS RunningTotal 
+   FROM Employees;
