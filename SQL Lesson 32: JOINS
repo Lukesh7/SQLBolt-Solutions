@@ -1,0 +1,48 @@
+Q1. Write a query to display:
+Employee Name
+Department Name
+Only matching records.
+
+	SELECT e.Name, d.DepartmentName 
+	FROM Employees e
+	JOIN Departments d ON 
+		e.DepartmentID = d.DepartmentID;
+
+Q2. Display:
+Employee Name
+Department Name
+Return all employees, even if a department is missing.
+
+	SELECT e.Name, d.DepartmentName
+	FROM Employees e
+	LEFT JOIN Departments d ON 
+		e.DepartmentID = d.DepartmentID;
+
+Q3. Display:
+Employee Name
+Department Name
+Return all departments, even if no employee belongs to them.
+
+	SELECT e.Name, d.DepartmentName
+	FROM Employees e
+	RIGHT JOIN Departments d ON e.DepartmentID = d.DepartmentID;
+
+Q4. Display all employees who do not have a matching department.
+Use LEFT JOIN
+Look for NULL values in the department table.
+
+	SELECT e.Name, d.DepartmentName
+	FROM Employees e
+	LEFT JOIN Departments d 
+		ON e.DepartmentID = d.DepartmentID
+	WHERE DepartmentName IS NULL;
+
+Q5. Show all departments that have no employees.
+Use RIGHT JOIN or LEFT JOIN
+Check for NULL on the employee side.
+
+	SELECT d.DepartmentName 
+	FROM Employees e
+	RIGHT JOIN Departments d 
+		ON e.DepartmentID = d.DepartmentID
+	WHERE e.Name IS NULL;
